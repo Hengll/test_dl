@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, send_from_directory
 from pytube import YouTube
 import os
+import time
+import random
 
 app = Flask(__name__)
 
@@ -16,6 +18,9 @@ def download():
     if not os.path.exists(target_path):
         os.makedirs(target_path)
 
+    delay = random.uniform(1, 3)
+    time.sleep(delay)
+    
     try:
         yt = YouTube(url)
         video = yt.streams.filter(only_audio=True).first()
